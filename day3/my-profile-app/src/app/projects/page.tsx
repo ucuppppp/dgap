@@ -11,36 +11,45 @@ const projects = [
 export default function Projects() {
   return (
     <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      exit={{opacity: 0}}
+      transition={{duration: 1}}
       className="min-h-screen flex flex-col items-center justify-center p-8"
     >
       <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 1 }}
+        initial={{opacity: 0, y: 20}}
+        animate={{opacity: 1, y: 0}}
+        transition={{delay: 0.5, duration: 1}}
         className="text-6xl mb-12 tracking-wider text-center"
       >
         Projects
       </motion.h1>
-      
+
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        transition={{delay: 0.8, duration: 1}}
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl"
       >
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 + index * 0.2, duration: 0.5 }}
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            transition={{delay: 0.8 + index * 0.2, duration: 0.5}} 
+            whileHover={{
+              scale: 1.05,
+              y: -5, 
+              transition: {delay: 0, duration: 0.2}, 
+            }}
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
-            <img src={project.img} alt={project.title} className="w-full h-64 object-cover" />
+            <img
+              src={project.img}
+              alt={project.title}
+              className="w-full h-64 object-cover"
+            />
             <div className="p-6">
               <h2 className="text-2xl font-semibold mb-2">{project.title}</h2>
               <p className="text-neutral-600 text-lg">{project.description}</p>
@@ -49,5 +58,5 @@ export default function Projects() {
         ))}
       </motion.div>
     </motion.main>
-  )
+  );
 }

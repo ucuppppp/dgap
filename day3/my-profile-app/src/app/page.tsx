@@ -25,15 +25,13 @@ export default function Home() {
 
   return (
     <motion.main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      initial={{opacity: 0}}
+      animate={{opacity: 1}}
+      exit={{opacity: 0}}
+      transition={{duration: 1}}
       className="min-h-screen flex flex-col items-center"
     >
-      <motion.h1
-        className="text-[30vh] tracking-wider font-bold text-center mt-8 flex space-x-1"
-      >
+      <motion.h1 className="text-[15vw] md:text-[16vw] tracking-wider font-bold text-center mt-8 flex space-x-1">
         {name.split("").map((letter, index) => (
           <motion.span
             key={index}
@@ -51,11 +49,11 @@ export default function Home() {
       <motion.img
         src="https://i.pinimg.com/736x/86/fb/0c/86fb0c76625026c979bf41b6f2276082.jpg"
         alt="Large background"
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1, duration: 1.5 }}
-        className="w-full h-[50vh] object-cover"
+        initial={{opacity: 0, scale: 1.1}}
+        animate={{opacity: 1, scale: 1}}
+        transition={{delay: 1, duration: 1.5}}
+        className="h-[80vh] w-full md:h-[60vh] lg:h-[50vh] object-cover"
       />
     </motion.main>
-  )
+  );
 }

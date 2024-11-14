@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Bebas_Neue } from 'next/font/google'
 import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/navbar'
+import CustomCursor from './components/customCursor'
 
 const bebasNeue = Bebas_Neue({ 
   weight: '400',
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${bebasNeue.className} bg-[#f5f0e6] text-neutral-900`}>
         <Navbar />
+        <CustomCursor />
         <AnimatePresence mode="wait">
           {children}
         </AnimatePresence>
