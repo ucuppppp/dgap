@@ -1,0 +1,142 @@
+// apiService.js
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: 'https://fakestoreapi.com/',
+  headers: { 'Content-Type': 'application/json' }
+});
+
+// Auth requests
+export async function loginRequest(username, password) {
+  const response = await apiClient.post('auth/login', { username, password });
+  return response.data;
+}
+
+// Product requests
+export async function fetchProducts() {
+  const response = await apiClient.get('products');
+  return response.data;
+}
+
+export async function fetchProductDetails(id) {
+  const response = await apiClient.get(`products/${id}`);
+  return response.data;
+}
+
+export async function addToCart(userId, products) {
+  const response = await apiClient.post('carts', {
+    userId,
+    date: new Date().toISOString(),
+    products
+  });
+  return response.data;
+}
+
+export async function fetchCart(userId) {
+  const response = await apiClient.get(`carts/user/${userId}`);
+  return response.data;
+}
+
+export async function updateCart(cartId, products) {
+  const response = await apiClient.put(`carts/${cartId}`, {
+    userId: 1, // Replace with dynamic userId if available
+    date: new Date().toISOString(),
+    products
+  });
+  return response.data;
+}
+
+export async function deleteCart(cartId) {
+  const response = await apiClient.delete(`carts/${cartId}`);
+  return response.data;
+}
+
+//component.css
+.card-body {
+    padding: 0.5rem;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .card-text {
+    font-size: 0.875rem;
+  }
+  
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.3rem 0.75rem;
+  }
+ 
+
+
+potongan Home.js
+return (
+    <div>
+      <h1>List of Items</h1>
+      <Row>
+        {products.map((product) => (
+          <Col key={product.id} xs={12} sm={6} md={2} lg={2}>
+            <Card style={{ marginBottom: '1rem', display: 'flex', flexDirection: 'column' }}>
+              <Card.Img
+                variant="top"
+                src={product.image}
+                style={{
+                  objectFit: 'cover',
+                  height: '120px',
+                  width: '100%',
+                }}
+              />
+              <Card.Body style={{ flex: 1 }}>
+                <Card.Text style={{ height: '60px', overflow: 'hidden' }}>{product.title}</Card.Text>
+                <Card.Text>${product.price}</Card.Text>
+                <Link className="d-flex justify-content-center" to={`/detail/${product.id}`}>
+                  <Button variant="primary">View Details</Button>
+                </Link>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </div>
+  );
+
+
+
+potongan Detail.js
+return (
+    <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh', marginTop: '20px' }}>
+      <div style={{ width: '40%', textAlign: 'center' }}>
+        <p style={{ marginTop: '320px' }}></p>
+        <h2>{product.title}</h2>
+        <img src={product.image} alt={product.title} style={{
+            objectFit: 'cover',
+            height: '320px',
+            width: '80%',
+          }} />
+        <p>{product.description}</p>
+        <p>Price: ${product.price}</p>
+        <Form>
+  <Row className="align-items-center">
+    <Col xs={6}>
+      <Form.Group>
+        <Form.Label>Quantity</Form.Label>
+        <Form.Control 
+          type="number" 
+          value={quantity} 
+          onChange={(e) => setQuantity(e.target.value)} 
+          min="1" 
+        />
+      </Form.Group>
+    </Col>
+    <Col xs={4} className="d-flex justify-content-between">
+      <Button style={{marginTop: '30px'}} variant="primary" onClick={handleAddToCart}>Add to Cart</Button>
+    </Col>
+  </Row>
+  <br />
+</Form>
+
+      </div>
+    </div>
+  );
